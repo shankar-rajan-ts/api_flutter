@@ -16,8 +16,18 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseMessaging.instance.requestPermission();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyDQ3vr2LOhoA7e4FTYSwSCudSOWP702CFI',
+      appId: '1:138569649495:android:68ce0e7aaf684736438212',
+      messagingSenderId: '138569649495',
+      projectId: 'bfx-notify',
+      databaseURL: 'https://bfx-notify-default-rtdb.firebaseio.com',
+      storageBucket: 'bfx-notify.appspot.com',
+    ),
+  );
+  // await FirebaseMessaging.instance.requestPermission();
+
   runApp(const MyApp());
 }
 
@@ -38,8 +48,6 @@ class MyApp extends StatelessWidget {
         "/notificationFire": (BuildContext context) => NotificationFire(),
         // "/currentLocation": (BuildContext context) => const CurrentLocation(),
         "/sample": (BuildContext context) => const Sample(),
-
-
       },
     );
   }

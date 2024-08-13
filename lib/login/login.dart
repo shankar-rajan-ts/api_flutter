@@ -241,7 +241,7 @@ class _LoginState extends State<Login> {
                         Navigator.of(context)
                             .popAndPushNamed("/sample");
                       },
-                      child: Text('cuttent location')),
+                      child: Text('fire_base')),
                 ],
               ),
             ),
