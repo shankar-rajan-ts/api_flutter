@@ -1,0 +1,30 @@
+{
+    "project_info": {
+      "project_number": "138569649495",
+      "firebase_url": "https://bfx-notify-default-rtdb.firebaseio.com",
+      "project_id": "bfx-notify",
+      "storage_bucket": "bfx-notify.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:138569649495:android:68ce0e7aaf684736438212",
+          "android_client_info": {
+            "package_name": "in.virtuhive.billing"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDQ3vr2LOhoA7e4FTYSwSCudSOWP702CFI"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
