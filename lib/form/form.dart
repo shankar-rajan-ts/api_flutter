@@ -21,10 +21,15 @@ class _FuncationState extends State<Funcation> {
   // final TextEditingController _numberController = TextEditingController();
   final numbersController = TextEditingController();
   final numberController = TextEditingController();
-  
+  final numbershow1Controller = TextEditingController();
+  final numbershow2Controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    print("object");
+    // myController.addListener(_printLatestValue);
+
     // Start listening to changes.
     // myController.addListener(_printLatestValue);
   }
@@ -87,7 +92,7 @@ class _FuncationState extends State<Funcation> {
                           ),
                       onPressed: () {},
                     ),
-                    hintText: "number",
+                    hintText: "number1",
                     hintStyle: GoogleFonts.outfit(
                       color: const Color(0xFF9A9A9A),
                       fontSize: 14,
@@ -134,7 +139,7 @@ class _FuncationState extends State<Funcation> {
                         });
                       },
                     ),
-                    hintText: "number",
+                    hintText: "number2",
                     hintStyle: GoogleFonts.outfit(
                       color: const Color(0xFF9A9A9A),
                       fontSize: 14,
@@ -208,20 +213,125 @@ class _FuncationState extends State<Funcation> {
                       print("Number 2 : $number2");
                       final sum = number1 - number2;
                       print("Sum : $sum");
+                      // numbershow1Controller.text = sum.toString();
+                      numbershow1Controller.text = number1.toString();
+                      numbershow2Controller.text = number2.toString();
 
                       numbersController.clear();
-                      numberController.clear();},
+                      numberController.clear();
+                    },
                     child: const Text(
                       "submit",
                       style: TextStyle(color: Colors.white),
                     )),
-                // const TextField(
-                //   obscureText: true,
-                //   decoration: InputDecoration(
-                //       border: InputBorder.none,
-                //       labelText: 'Enter Name',
-                //       hintText: 'Enter Your Name'),
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: numbershow1Controller,
+                  // controller: numberController,
+                  // keyboardType: TextInputType.number,
+                  // textInputAction: TextInputAction.next,
+                  //  focusNode: _nameFocusNode,
+                  // controller: _numberController,
+                  style: GoogleFonts.outfit(
+                    color: const Color(0xFF373737),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                  ),
+                  // controller: passwordController,
+                  // obscureText: !showPassword,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.visibility_off
+                          // showPassword ? Icons.visibility : Icons.visibility_off,
+                          // color: const Color.fromARGB(255, 59, 59, 59),
+                          ),
+                      onPressed: () {
+                        setState(() {
+                          // showPassword = !showPassword;
+                        });
+                      },
+                    ),
+                    hintText: "number show 1",
+                    hintStyle: GoogleFonts.outfit(
+                      color: const Color(0xFF9A9A9A),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                    ),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFD2D2D2)),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF155092)),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: numbershow2Controller,
+                  // controller: numberController,
+                  // keyboardType: TextInputType.number,
+                  // textInputAction: TextInputAction.next,
+                  //  focusNode: _nameFocusNode,
+                  // controller: _numberController,
+                  style: GoogleFonts.outfit(
+                    color: const Color(0xFF373737),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                  ),
+                  // controller: passwordController,
+                  // obscureText: !showPassword,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.visibility_off
+                          // showPassword ? Icons.visibility : Icons.visibility_off,
+                          // color: const Color.fromARGB(255, 59, 59, 59),
+                          ),
+                      onPressed: () {
+                        setState(() {
+                          // showPassword = !showPassword;
+                        });
+                      },
+                    ),
+                    hintText: "number show 2",
+                    hintStyle: GoogleFonts.outfit(
+                      color: const Color(0xFF9A9A9A),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                    ),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFD2D2D2)),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF155092)),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                  ],
+                ),
               ],
             ),
           ),
