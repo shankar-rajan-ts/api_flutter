@@ -242,6 +242,14 @@ class _LoginState extends State<Login> {
                             .popAndPushNamed("/sample");
                       },
                       child: Text('fire_base')),
+                      SizedBox(height: 10,),
+                        ElevatedButton( 
+                      onPressed: () {
+                      
+                        Navigator.of(context)
+                            .popAndPushNamed("/funcation");
+                      },
+                      child: Text('funcation')),
                 ],
               ),
             ),

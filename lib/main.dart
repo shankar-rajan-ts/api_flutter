@@ -1,3 +1,4 @@
+import 'package:api_flutter/form/form.dart';
 import 'package:api_flutter/login/login.dart';
 import 'package:api_flutter/map/cuttent-loaction.dart';
 import 'package:api_flutter/map/map.dart';
@@ -45,9 +46,11 @@ class MyApp extends StatelessWidget {
         '/': (BuildContext context) => const Login(),
         // '/t': (BuildContext context) => const MyHomePage(),
         // "/mapSample": (BuildContext context) => const MapSample(),
-        "/notificationFire": (BuildContext context) => NotificationFire(),
+        // "/notificationFire": (BuildContext context) => NotificationFire(),
         // "/currentLocation": (BuildContext context) => const CurrentLocation(),
-        "/sample": (BuildContext context) => const Sample(),
+        // "/sample": (BuildContext context) => const Sample(),
+        "/funcation": (BuildContext context) => const Funcation(),
+
       },
     );
   }
