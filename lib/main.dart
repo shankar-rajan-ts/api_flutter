@@ -5,6 +5,8 @@ import 'package:api_flutter/map/cuttent-loaction.dart';
 import 'package:api_flutter/map/map.dart';
 import 'package:api_flutter/notifications_firebase/notification.dart';
 import 'package:api_flutter/notifications_firebase/sample.dart';
+import 'package:api_flutter/otp/otp.dart';
+import 'package:api_flutter/otp/otp_design.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,11 @@ class MyApp extends StatelessWidget {
         "/currentLocation": (BuildContext context) => const CurrentLocation(),
         "/sample": (BuildContext context) => const Sample(),
         "/funcation": (BuildContext context) => const Funcation(),
-        // "/FormApi": (BuildContext context) => const FormApi(),
+        "/otp": (BuildContext context) => const Otp(),
+        "/otp_Design": (BuildContext context) => const Otp_Design(),
+        // "/pinputExample": (BuildContext context) => const PinputExample(),
+
+
       },
     );
   }

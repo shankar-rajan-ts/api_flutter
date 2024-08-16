@@ -248,17 +248,17 @@ class _LoginState extends State<Login> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).popAndPushNamed("/funcation");
+                          Navigator.of(context).popAndPushNamed("/otp");
                         },
                         child: Text('funcation')),
-                    //        SizedBox(
-                    //   height: 10,
-                    // ),
-                    // ElevatedButton(
-                    //     onPressed: () {
-                    //       Navigator.of(context).popAndPushNamed("/formApi");
-                    //     },
-                    //     child: Text('FormApi')),
+                           SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).popAndPushNamed("/otp_Design");
+                        },
+                        child: Text('pinput')),
                   ],
                 ),
               ),
