@@ -1,4 +1,5 @@
 import 'package:api_flutter/api/formapi.dart';
+import 'package:api_flutter/firebase_otp/log.dart';
 import 'package:api_flutter/form/form.dart';
 import 'package:api_flutter/login/login.dart';
 import 'package:api_flutter/map/cuttent-loaction.dart';
@@ -46,7 +47,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => const Login(),
+        // '/': (BuildContext context) => const Login(),
+        '/': (BuildContext context) => const LoginPage(),
+
         // '/t': (BuildContext context) => const MyHomePage(),
         "/mapSample": (BuildContext context) => const MapSample(),
         // "/notificationFire": (BuildContext context) => NotificationFire(),
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
         "/funcation": (BuildContext context) => const Funcation(),
         "/otp": (BuildContext context) => const Otp(),
         "/otp_Design": (BuildContext context) => const Otp_Design(),
-        // "/pinputExample": (BuildContext context) => const PinputExample(),
+        // "/loginPage": (BuildContext context) => const LoginPage(),
 
 
       },

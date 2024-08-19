@@ -18,23 +18,23 @@ class _Otp_DesignState extends State<Otp_Design> {
   final Telephony telephony = Telephony.instance;
   String textReceived = " ";
 
-  void startListening() {
-    print("OPt");
-    telephony.listenIncomingSms(
-        onNewMessage: (SmsMessage message) {
-          print("opt message");
-          if (message.body!.contains("shangar-app")) {
-            String otpCode = message.body!.substring(0, 6);
-            print(otpCode);
-            setState(() {
-              _otpController.text = otpCode;
-              textReceived = message.body.toString();
-              _pinController.text = otpCode;
-            });
-          }
-        },
-        listenInBackground: false);
-  }
+  // void startListening() {
+  //   print("OPt");
+  //   telephony.listenIncomingSms(
+  //       onNewMessage: (SmsMessage message) {
+  //         print("opt message");
+  //         if (message.body!.contains("shangar-app")) {
+  //           String otpCode = message.body!.substring(0, 6);
+  //           print(otpCode);
+  //           setState(() {
+  //             _otpController.text = otpCode;
+  //             textReceived = message.body.toString();
+  //             _pinController.text = otpCode;
+  //           });
+  //         }
+  //       },
+  //       listenInBackground: false);
+  // }
 
   late final SmsRetriever smsRetriever;
   late final TextEditingController pinController;
@@ -43,7 +43,7 @@ class _Otp_DesignState extends State<Otp_Design> {
   @override
   void initState() {
     super.initState();
-    startListening();
+    // startListening();
     formKey = GlobalKey<FormState>();
     pinController = TextEditingController();
     focusNode = FocusNode();
@@ -61,7 +61,7 @@ class _Otp_DesignState extends State<Otp_Design> {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
-      phoneNumber: '+91 1111 111 11',
+      phoneNumber: '+91 1111 111 111',
       timeout: const Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
@@ -101,6 +101,10 @@ class _Otp_DesignState extends State<Otp_Design> {
     );
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("OTP"),
+          centerTitle: true,
+        ),
         body: Center(
           child: Column(children: [
             const Text("VERIFICATION"),
@@ -180,36 +184,7 @@ class _Otp_DesignState extends State<Otp_Design> {
               },
               child: const Text('Validate'),
             ),
-            TextField(
-                      keyboardType: TextInputType.number,
-                      style: GoogleFonts.outfit(
-                        color: const Color(0xFF373737),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      ),
-                      controller: _otpController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        hintText: "mobile number",
-                        hintStyle: GoogleFonts.outfit(
-                          color: const Color(0xFF9A9A9A),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 189, 9, 96)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFD2D2D2)),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF155092)),
-                        ),
-                      ),
-                    ),
+            
           ]),
         ),
       ),
