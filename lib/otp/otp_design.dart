@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+import 'package:telephony/telephony.dart';
 
 class Otp_Design extends StatefulWidget {
   const Otp_Design({super.key});
@@ -9,6 +12,30 @@ class Otp_Design extends StatefulWidget {
 }
 
 class _Otp_DesignState extends State<Otp_Design> {
+  final TextEditingController _pinController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+
+  final Telephony telephony = Telephony.instance;
+  String textReceived = " ";
+
+  void startListening() {
+    print("OPt");
+    telephony.listenIncomingSms(
+        onNewMessage: (SmsMessage message) {
+          print("opt message");
+          if (message.body!.contains("shangar-app")) {
+            String otpCode = message.body!.substring(0, 6);
+            print(otpCode);
+            setState(() {
+              _otpController.text = otpCode;
+              textReceived = message.body.toString();
+              _pinController.text = otpCode;
+            });
+          }
+        },
+        listenInBackground: false);
+  }
+
   late final SmsRetriever smsRetriever;
   late final TextEditingController pinController;
   late final FocusNode focusNode;
@@ -16,9 +43,11 @@ class _Otp_DesignState extends State<Otp_Design> {
   @override
   void initState() {
     super.initState();
+    startListening();
     formKey = GlobalKey<FormState>();
     pinController = TextEditingController();
     focusNode = FocusNode();
+    _verifyOtp();
   }
 
   @override
@@ -26,6 +55,30 @@ class _Otp_DesignState extends State<Otp_Design> {
     pinController.dispose();
     focusNode.dispose();
     super.dispose();
+  }
+
+  void _verifyOtp() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    await auth.verifyPhoneNumber(
+      phoneNumber: '+91 1111 111 11',
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await auth.signInWithCredential(credential);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        print('Verification failed: ${e.message}');
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        String smsCode = '123456';
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+            verificationId: verificationId, smsCode: smsCode);
+        await auth.signInWithCredential(credential);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        print('Auto-retrieval timeout: $verificationId');
+      },
+    );
   }
 
   @override
@@ -73,6 +126,15 @@ class _Otp_DesignState extends State<Otp_Design> {
                 autofillHints: const [
                   AutofillHints.oneTimeCode,
                 ],
+                validator: (value) {
+                  return value == '123456' ? null : 'Pin is incorrect';
+                },
+                onCompleted: (pin) {
+                  debugPrint('onCompleted: $pin');
+                },
+                onChanged: (value) {
+                  debugPrint('onChanged: $value');
+                },
                 cursor: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -102,19 +164,52 @@ class _Otp_DesignState extends State<Otp_Design> {
                 ),
                 textInputAction: TextInputAction.next,
                 showCursor: true,
-                validator: (s) {
-                  // print('validating code: $s');
-                },
-                onCompleted: null,
+                // validator: (s) {
+                //   print('validating code: $s');
+                // },
+                // onCompleted: null,
               ),
             ),
             const SizedBox(
               height: 15,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("Verify"),
+            TextButton(
+              onPressed: () {
+                focusNode.unfocus();
+                formKey.currentState!.validate();
+              },
+              child: const Text('Validate'),
             ),
+            TextField(
+                      keyboardType: TextInputType.number,
+                      style: GoogleFonts.outfit(
+                        color: const Color(0xFF373737),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      ),
+                      controller: _otpController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: "mobile number",
+                        hintStyle: GoogleFonts.outfit(
+                          color: const Color(0xFF9A9A9A),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        ),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 189, 9, 96)),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFD2D2D2)),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF155092)),
+                        ),
+                      ),
+                    ),
           ]),
         ),
       ),

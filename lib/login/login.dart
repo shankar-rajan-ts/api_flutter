@@ -251,7 +251,7 @@ class _LoginState extends State<Login> {
                           Navigator.of(context).popAndPushNamed("/otp");
                         },
                         child: Text('funcation')),
-                           SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     ElevatedButton(
@@ -259,6 +259,39 @@ class _LoginState extends State<Login> {
                           Navigator.of(context).popAndPushNamed("/otp_Design");
                         },
                         child: Text('pinput')),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      style: GoogleFonts.outfit(
+                        color: const Color(0xFF373737),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      ),
+                      // controller: emailController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: "Enter your number",
+                        hintStyle: GoogleFonts.outfit(
+                          color: const Color(0xFF9A9A9A),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        ),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 189, 9, 96)),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFFD2D2D2)),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF155092)),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
